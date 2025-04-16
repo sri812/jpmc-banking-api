@@ -38,6 +38,26 @@ Run unit testing with
 mvn test
 ```
 ---
+---
+### TASK 3 : OAUTH BEARER TOKEN (NEEDED TO ACCESS APIS)
+	1. For testing purposes, implemented a mock authentication server using the Nimbus JOSE+JWT library:
+
+1. get the token (Initial Step)
+```bash
+  
+  curl -X GET "http://localhost:8080/token"
+```
+
+# Replace YOUR_TOKEN_HERE with the actual token in all the commands below
+
+This will return a JSON response with an access_token that you can use for authentication:
+json{
+"access_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjEyMzQ1Ni...",
+"token_type": "Bearer",
+"expires_in": 3600
+}
+
+---
 ### TASK 1 : TRANSACTIONS AND ACCOUNT MANAGEMENT
 	1.	Account Management: Create accounts, view all accounts, and fetch individual account details.
 	2.	Transaction Management: Create transactions (credit/debit) for a specific account.
@@ -57,22 +77,25 @@ Logging with slf4j, Custom Exception Handling, Swagger documentation.
 
 ```bash
 curl -X POST "http://localhost:8080/api/accounts" \
-     -H "Content-Type: application/json" \
-     -d '{"accountNumber":"12345","accountType":"SAVINGS","balance":1000}'
+  -H "Authorization: Bearer YOUR_TOKEN_HERE" \
+  -H "Content-Type: application/json" \
+  -d '{"accountNumber":"12345","accountType":"SAVINGS","balance":1000}'
 ```
 
 2.	Get All Accounts
 	•	GET /api/accounts
 	•	Response: List of AccountDtos
 ```bash
-   curl -X GET "http://localhost:8080/api/accounts"
+   curl -X GET "http://localhost:8080/api/accounts" \
+     -H "Authorization: Bearer YOUR_TOKEN_HERE"
    ```
 
 3.	Get Account by ID
 	•	GET /api/accounts/{id}
 	•	Response: AccountDtoc
 ```bash
-   curl -X GET "http://localhost:8080/api/accounts/1"
+   curl -X GET "http://localhost:8080/api/accounts/1" \
+  -H "Authorization: Bearer YOUR_TOKEN_HERE"
    ```
 
 4.	Create Transaction
@@ -80,8 +103,14 @@ curl -X POST "http://localhost:8080/api/accounts" \
 	•	Request Body: TransactionDto (e.g., amount, type, description, date)
 ```bash
 curl -X POST "http://localhost:8080/api/accounts/1/transactions" \
-     -H "Content-Type: application/json" \
-     -d '{"amount":200,"type":"credit","description":"Salary","date":"2025-04-15"}'
+  -H "Authorization: Bearer YOUR_TOKEN_HERE" \
+  -H "Content-Type: application/json" \
+  -d '{
+        "amount": 200,
+        "type": "credit",
+        "description": "Salary",
+        "date": "2025-04-15"
+      }'
    ```
 
 5.	Get Transactions by Account ID
@@ -89,15 +118,16 @@ curl -X POST "http://localhost:8080/api/accounts/1/transactions" \
 	•	Response: List of TransactionDtos
 ```bash
   
-  curl -X GET "http://localhost:8080/api/accounts/1/transactions"
+  curl -X GET "http://localhost:8080/api/accounts/1/transactions" \
+     -H "Authorization: Bearer YOUR_TOKEN_HERE"
 ```
 
 6.	Get Monthly Statement
 	•	GET /api/statements/{accountId}?month={year-month}
 	•	Example: /api/statements/1?month=2025-04
 ```bash
-  
-  curl -X GET "http://localhost:8080/api/statements/1?month=2025-04"
+  curl -X GET "http://localhost:8080/api/statements/1?month=2025-04" \
+     -H "Authorization: Bearer YOUR_TOKEN_HERE"
 ```
 ---
 Spring Boot-based banking application where users can create accounts, perform transactions, and view monthly statements.
@@ -196,6 +226,4 @@ curl -X POST "http://localhost:8080/api/accounts/1/transactions" \
 
 ### TASK 2 : IN MEMORY DATABASE
 	1. Used an in-memory H2 database
-
----
 

@@ -16,6 +16,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 import java.time.Instant;
 
+/*This class:
+
+Generates RSA key pairs for signing and verifying JWTs
+Defines mock users with different roles
+Provides endpoints for token generation (/token) and key publication (/.well-known/jwks.json)
+Creates JWTs with role claims that Spring Security can use for authorization*/
 @RestController
 public class MockAuthController {
 
