@@ -38,6 +38,13 @@
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
 
+		<!-- Swagger -->
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>2.2.0</version>
+		</dependency>
+
 		<!-- H2 Database -->
 		<dependency>
 			<groupId>com.h2database</groupId>
@@ -53,6 +60,23 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- for karate automation testing -->
+		<!-- Karate Core Dependency -->
+		<dependency>
+			<groupId>com.intuit.karate</groupId>
+			<artifactId>karate-core</artifactId>
+			<version>1.2.0</version> <!-- Use the latest open-source version, free to use-->
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Karate JUnit5 Dependency -->
+		<dependency>
+			<groupId>com.intuit.karate</groupId>
+			<artifactId>karate-junit5</artifactId>
+			<version>1.2.0</version> <!-- Use the latest open-source version, free to use  -->
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
