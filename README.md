@@ -1,10 +1,10 @@
-# Spring Boot Banking Application
+## Spring Boot Banking Application
 
 This is a Spring Boot-based banking application where users can create accounts, perform transactions, and view monthly statements.
 
 The project follows a clean architecture with `controller`, `service`, `model`, and `repository` packages. It also features custom exception handling and input validations with DTOs.
 
-## Requirements:
+### Requirements:
 - Java 17
 - Maven
 - No external database setup required – uses in-memory storage
@@ -26,7 +26,7 @@ All screenshots showing API responses are stored in the `docs/screenshots/` dire
 
 ---
 
-##  Run the spring boot CRUD API application with
+###  Run the spring boot CRUD API application with
 ```bash
 mvn clean install
 ```
@@ -42,6 +42,7 @@ mvn test
 
 ### TASK 3 : Oauth, a pre-requisite to hit the Rest APIS
 	1. For testing purposes, implemented a mock authentication server using the Nimbus JOSE+JWT library:
+	2. Only users with the role new_app_role can access the protected endpoints for account and transaction data.
 
 1. get the token (Initial Step)
 ```bash
@@ -49,7 +50,7 @@ mvn test
   curl -X GET "http://localhost:8080/token"
 ```
 
-# Replace YOUR_TOKEN_HERE with the actual token in all the commands below
+### Replace YOUR_TOKEN_HERE with the actual token in all the commands below
 
 This will return a JSON response with an access_token that you can use for authentication:
 
@@ -60,7 +61,7 @@ This will return a JSON response with an access_token that you can use for authe
 }
 
 ---
-### TASK 1 : TRANSACTIONS AND ACCOUNT MANAGEMENT
+### TASK 1 : Transactions and Account Management
 	1.	Account Management: Create accounts, view all accounts, and fetch individual account details.
 	2.	Transaction Management: Create transactions (credit/debit) for a specific account.
 	3.	Monthly Statement: Fetch a monthly transaction statement for a given account.
@@ -135,4 +136,9 @@ curl -X POST "http://localhost:8080/api/accounts/1/transactions" \
 
 ### TASK 2 : IN MEMORY DATABASE
 	1. Used an in-memory H2 database
+---
 
+#### Troubleshooting
+If you receive a 401 Unauthorized error:
+Make sure you're including the token in the Authorization header
+Check that the token format is correct: Bearer your_token_here
